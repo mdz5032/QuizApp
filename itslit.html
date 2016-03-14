@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+<body>
+  
+<form action="" name = "form1">
+  <input type="button" value="Check Form" name="btnCheck" />
+  
+  <input type="button" value="Next" name="dB" />
+  
+  
+</form>
+
+
+<form action="" name = "form2">
+  
+<script>
+
+  var allQuestions = [
+    
+    {
+      
+      question: "What is my first name?",
+      choices: ["Mark", "Mike", "Austin", "Joey"],
+      correctAnswer: 0
+      
+      
+    },
+    
+    {
+      
+      question: "What is my last name?",
+      choices: ["Mckee", "Zindren", "Roynane", "Bergin"],
+      correctAnswer: 1
+      
+      
+    },
+    
+    {
+      
+      question: "How old am I?",
+      choices: ["27", "22", "30", "24"],
+      correctAnswer: 3
+      
+      
+    },
+    
+        {
+      
+      question: "Is Mike a Boy",
+      choices: ["Yes", "No"],
+      correctAnswer: 0
+      
+      
+    }
+    
+    
+    ];
+    
+    
+
+  var correctAnswers = 0;
+
+
+  function displayQuestion(){
+  
+          var question = $("<p>").text(allQuestions[counter].question);
+          $('body').append(question);
+  }
+
+  function displayAnswers (){
+
+      //Loop through all the answers
+      for (var index = 0; index < allQuestions[counter].choices.length; index++){
+
+
+      //Create the label element
+      var a = $("<label>").text(allQuestions[counter].choices[index]);
+      
+      //Create the input element
+      var ballon = $('<input>').attr({
+  
+                id: allQuestions[counter].choices[index],
+                name: 'answers',
+                type: 'radio'
+  
+      });
+
+      //Insert the input into the label
+      ballon.appendTo(a);
+      
+      //Insert the label into the DOM - replace body with the required position
+      $('body').append(a);
+
+      
+      // Put spaces between the questions
+      var y = document.createElement("P");
+      document.body.appendChild(y);
+
+ }
+ 
+}
+
+    //the main show
+      
+            var counter = 0;
+            
+            function displayEverything(){
+            
+            displayQuestion();
+            displayAnswers();
+            
+            
+            }
+            
+            displayEverything();
+          
+ 
+    var myForm = document.form1;
+    var radios = document.getElementsByName("answers");
+    var clearForm = document.form2;
+    
+  
+    
+
+
+    function checkAnswer (){
+    
+    //find the checked radio
+    for (var index = 0; index < radios.length; index++){
+    
+    if (radios[index].checked){
+   
+   
+      //check the answer
+        if (index == allQuestions[counter].correctAnswer){
+          
+          alert("you have chosen the correct answer");
+          correctAnswers++;
+        }
+        else {
+          alert("you have chose the wrong answer");
+        
+        }
+      
+    }
+    }
+    }
+    
+   function clearShit (){
+     
+     
+     $("p").remove();
+     $("label").remove();
+     $('input[type="radio"]').remove();
+     
+
+     
+   }
+   
+   
+  function makeButton(){
+ 
+  var btn = document.createElement("BUTTON");        // Create a <button> element
+  var t = document.createTextNode("CLICK ME");       // Create a text node
+  btn.appendChild(t);                                // Append the text to <button>
+  document.body.appendChild(btn);                    // Append <button> to <body>
+  
+  //var buttonsDuh = $("button");
+  //buttonsDuh.addEventListener("click", doBoth);
+
+ }
+   
+   
+   function doBoth (){
+     
+    
+    if (counter <= allQuestions.length){
+     checkAnswer();
+     counter++;
+     clearShit();
+     displayEverything();
+
+    }
+    
+    else {
+      alert("You have gotten " + correctAnswers + " questoions correct out of " + allQuestions.length);
+    }
+     
+     
+     
+   }
+   
+   function addClick (){
+     
+  var buttonsDuh = $("button");
+  buttonsDuh.addEventListener("click", doBoth);
+  
+   }
+  
+    
+  
+  //add function to button
+   
+  myForm.btnCheck.addEventListener("click", checkAnswer);
+  
+  myForm.dB.addEventListener("click", doBoth);
+ 
+    
+
+
+
+
+</script>
+
+ 
+</form>
+</body>
+</html>
